@@ -1,0 +1,125 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: url('https://wallpapers.com/images/hd/bookshelf-background-xfix8ihv6dmfjzyu.jpg');
+    background-size: cover;
+    background-attachment: fixed; 
+    min-height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white; 
+}
+
+h1 {
+    color: #ffffff;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+    margin: 0 0 20px 0;
+    font-size: 30px;
+}
+
+h2 {
+    color: #ffffff;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+    margin: 0 0 20px 0;
+    font-size: 25px;
+}
+
+.container h2 {
+    color: #c08037;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+}
+
+
+.container-livros {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; 
+    width: 100%;
+}
+
+.livros {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;  
+    justify-content: space-between;
+    
+    margin-top: 20px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    height: 430px; 
+    width: 300px;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.livros img {
+    width: 150px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.livros h2 {
+    color: #9f7639;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+    font-size: 22px;
+    margin: 10px 0 5px 0;
+}
+
+.livros p {
+    text-align: center;
+    font-size: 20px;
+    color: #9f7639;
+    margin: 5px 0 15px 0; 
+}
+
+.btn-emprestimo {
+    background-color: #428c42;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    text-decoration: none;
+    text-align: center;
+    box-sizing: border-box;
+    transition: background-color 0.2s ease;
+}
+
+.btn-emprestimo:hover {
+    background-color: #7d5c2b;
+}
+
+button {
+    background-color: #ffffff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+input {
+    width: 200px;
+    padding: 8px;
+    box-sizing: border-box;
+    margin: 5px;
+    border-radius: 10px;
+}

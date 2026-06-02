@@ -1,0 +1,139 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: url('https://wallpapers.com/images/hd/bookshelf-background-xfix8ihv6dmfjzyu.jpg');
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.secao-emprestimos {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.secao-emprestimos h2 {
+    color: #9f7639;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+.grid-emprestimos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.card-emprestimo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ffffff;
+    border-radius: 5px;
+    height: 430px;
+    width: 300px;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.card-emprestimo img {
+    width: 150px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.info-emprestimo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-emprestimo h3 {
+    color: #9f7639;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+    font-size: 22px;
+    margin: 10px 0 5px 0;
+}
+
+.card-emprestimo p {
+    text-align: center;
+    font-size: 18px;
+    color: #555;
+    margin: 3px 0;
+    font-family: sans-serif;
+}
+
+.card-emprestimo p strong {
+    color: #9f7639;
+}
+
+.data-devolucao {
+    font-weight: bold;
+    color: #c0392b !important;
+}
+
+.btn-devolver {
+    background-color: #c0392b;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    transition: background-color 0.2s ease;
+    margin-top: 10px;
+}
+
+.btn-devolver:hover {
+    background-color: #962d22;
+}
+
+.sem-emprestimos {
+    color: #9f7639;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 22px;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.btn-voltar {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #9f7639;
+    text-decoration: none;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    border: 1px solid #9f7639;
+    padding: 8px 16px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    transition: all 0.2s ease;
+}
+
+.btn-voltar:hover {
+    background-color: #9f7639;
+    color: #ffffff;
+}

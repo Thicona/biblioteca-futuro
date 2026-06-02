@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PagPrincipal</title>
+    <link rel="stylesheet" href="../css/pagPrincipal.css">
+</head>
+
+<body>
+    <h1>Bem Vindo a nossa Nuvem Literária</h1>
+    <h2>Aqui você encontrará uma ampla seleção de livros e recursos literários</h2>
+
+    <!-- CONTAINER DE BUSCA CORRIGIDO COM OS IDS PARA A API -->
+    <div class="container">
+        <h2>Busque seu livro</h2>
+        <input type="text" id="buscaLivro" placeholder="Digite o nome do livro...">
+        <button onclick="buscarLivros()">🔎</button>
+    </div>
+
+    <!-- ELEMENTO DE CARREGAMENTO (LOADING) QUE ESTAVA FALTANDO -->
+    <div id="loading" style="color: black; font-weight: bold; margin: 15px 0; text-align: center;"></div>
+
+    <!-- CONTAINER ONDE OS LIVROS DA API VÃO APARECER -->
+    <div id="resultadosLivros" class="container-livros">
+        <!-- Os livros pesquisados na API vão brotar aqui dentro -->
+    </div>
+
+   
+    <div class="container-livros">
+        <div class="livros">
+            <img src="https://m.media-amazon.com/images/I/41lCCL6N4nL._SY445_SX342_ML2_.jpg" alt="">
+            <h2>O Menino do Pijama Listrado</h2>
+            <p>John Boyne</p>
+            <a href="formulario.html?titulo=O%20Menino%20do%20Pijama%20Listrado&capa=https://m.media-amazon.com/images/I/41lCCL6N4nL._SY445_SX342_ML2_.jpg"
+                class="btn-emprestimo">Emprestar</a>
+        </div>
+
+        <div class="livros">
+            <img src="https://http2.mlstatic.com/D_NQ_NP_2X_980089-MLU50709668667_072022-F.webp" alt="">
+            <h2>A Hipótese do Amor </h2>
+            <p>Ali Hazelwood</p>
+            <a href="formulario.html?titulo=A%20Hip%C3%B3tese%20do%20Amor&capa=https://http2.mlstatic.com/D_NQ_NP_2X_980089-MLU50709668667_072022-F.webp"
+                class="btn-emprestimo">Emprestar</a>
+        </div>
+
+        <div class="livros">
+            <img src="https://m.media-amazon.com/images/I/41+Qj-qZPOL._SY445_SX342_ML2_.jpg" alt="">
+            <h2>O Pequeno Príncipe</h2>
+            <p>Antoine de Saint-Exupéry</p>
+            <a href="formulario.html?titulo=O%20Pequeno%20Pr%C3%ADncipe&capa=https://m.media-amazon.com/images/I/41+Qj-qZPOL._SY445_SX342_ML2_.jpg"
+                class="btn-emprestimo">Emprestar</a>
+        </div>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+
+</html>
