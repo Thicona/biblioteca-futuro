@@ -1,18 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BiblioTech</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="../css/cadastro.css">
 </head>
-
 <body>
-    <section id="tela-login">
+    <section id="tela-cadastro">
         <h1>Bemm Vindo à Nuvem Literária</h1>
-        <h2>Faça seu login</h2>
-        <h3>Se não tem uma conta, <a href="cadastro.html">cadastre-se</a></h3>
+        <h2>Faça seu cadastro</h2>
         <div class="container-login">
 
             <div class="campo-grupo">
@@ -27,18 +24,16 @@
                 <input type="text" id="cpf-login" placeholder="Digite seu CPF(12345678900)">
             </div>
 
-            <input type="password" id="senha-admin" placeholder="Senha (admin: biblioteca123, leitor: 123456)">
+             <div class="campo-grupo">
+                <input type="password" id="senha-login" placeholder="Digite sua senha(admin)">
+            </div>
+        
 
-        </div>
-
-        <button class="btn-entrar" onclick="realizarLogin()">
-            Entrar
-        </button>
+            <button class="btn-entrar" onclick="realizarCadastro()">Cadastrar</button>
         
     </section>
 
 
     <script src="../script.js"></script>
 </body>
-
 </html>

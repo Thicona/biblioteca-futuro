@@ -4,12 +4,15 @@ const clientes = JSON.parse(localStorage.getItem('usuariosCadastrados')) || [
     { nome: "Mariana Costa" }
 ];
 
-function realizarLogin() {
+
+
+function realizarCadastro() {
     const nome = document.getElementById('nome-completo').value.trim();
     const email = document.getElementById('email-login').value.trim();
     const cpf = document.getElementById('cpf-login').value.trim();
+    const senha = document.getElementById('senha-login').value.trim();
 
-    if (!nome || !email || !cpf) {
+    if (!nome || !email || !cpf || !senha) {
         alert("Por favor, preencha todos os campos.");
         return;
     }
@@ -31,80 +34,104 @@ function realizarLogin() {
         return;
     }
 
-    window.location.href = "pagPrincipal.html";
+    if (senha.length < 6) {
+        alert("A senha deve conter pelo menos 6 caracteres.");
+        return;
+    }
+
+    alert("Cadastro realizado com sucesso!");
+    window.location.href = "index.html";
 }
 
-async function buscarLivros() {
-    // CORREÇÃO: Pegando os elementos atualizados direto no clique
-    const inputBusca = document.getElementById('buscaLivro');
-    const divLoading = document.getElementById('loading');
-    const divResultados = document.getElementById('resultadosLivros');
 
-    if (!inputBusca) {
-        alert("Erro no HTML: Campo de busca não encontrado.");
+function realizarLogin() {
+
+    const nome = document.getElementById("nome-completo").value.trim();
+    const email = document.getElementById("email-login").value.trim();
+    const cpf = document.getElementById("cpf-login").value.trim();
+    const senha = document.getElementById("senha-admin").value.trim();
+
+    if (!nome || !email || !cpf || !senha) {
+        alert("Preencha todos os campos.");
         return;
     }
 
-    const termo = inputBusca.value.trim();
+    localStorage.setItem("usuarioLogado", nome);
+
+    // Administrador
+    if (senha === "biblioteca123") {
+        window.location.href = "admin.html";
+        return;
+    }
+
+    // Leitor comum
+    if (senha.length <= 6) {
+        window.location.href = "pagPrincipal.html";
+        return;
+    }
+
+    alert("Senha inválida!");
+}
+
+
+async function buscarLivros() {
+
+    const termo = document.getElementById("buscaLivro").value.trim();
+    const resultados = document.getElementById("resultadosLivros");
 
     if (!termo) {
-        alert("Digite um livro");
+        alert("Digite o nome de um livro.");
         return;
     }
 
-    if (divLoading) divLoading.innerText = "Carregando...";
-    if (divResultados) divResultados.innerHTML = "";
+    resultados.innerHTML = "Buscando...";
 
     try {
-        // CORREÇÃO: Adicionado o /search.json?q= e o sinal de $ na URL da API
-        const resposta = await fetch("https://openlibrary.org" + encodeURIComponent(termo));
+
+        const resposta = await fetch(
+            `https://openlibrary.org/search.json?title=${encodeURIComponent(termo)}`
+        );
+
         const dados = await resposta.json();
 
-        if (divLoading) divLoading.innerText = "";
-
         if (!dados.docs || dados.docs.length === 0) {
-            if (divResultados) divResultados.innerHTML = "<p>Nenhum livro encontrado</p>";
+            resultados.innerHTML = "<p>Nenhum livro encontrado.</p>";
             return;
         }
 
-        dados.docs.slice(0, 5).forEach((livro, index) => {
+        resultados.innerHTML = "";
+
+        dados.docs.slice(0, 10).forEach(livro => {
+
             const titulo = livro.title || "Sem título";
-            const autor = livro.author_name ? livro.author_name[0] : "Autor desconhecido";
-            
-            // CORREÇÃO: URL das capas corrigida com o caminho oficial da API
+
+            const autor = livro.author_name
+                ? livro.author_name.join(", ")
+                : "Autor desconhecido";
+
             const capa = livro.cover_i
-                ? "https://openlibrary.org" + livro.cover_i + "-M.jpg"
-                : "https://placeholder.com";
+                ? `https://covers.openlibrary.org/b/id/${livro.cover_i}-M.jpg`
+                : "https://via.placeholder.com/128x180?text=Sem+Capa";
 
-            const tituloEscapado = titulo.replace(/'/g, "\\'").replace(/"/g, '&quot;');
-            const capaEscapada = capa.replace(/'/g, "\\'");
+            resultados.innerHTML += `
+    <div class="livros">
+        <img src="${capa}" alt="${titulo}">
+        <h2>${titulo}</h2>
+        <p>${autor}</p>
 
-            if (divResultados) {
-                divResultados.innerHTML += `
-                    <div class="livro">
-                        <img src="${capa}" alt="Capa">
-                        <h3>${titulo}</h3>
-                        <p>${autor}</p>
-                        
-                        <select id="cliente-${index}">
-                            <option value="">Selecione um cliente</option>
-                            ${clientes.map(cliente => `
-                                <option value="${cliente.nome}">${cliente.nome}</option>
-                            `).join("")}
-                        </select>
-
-                        <button onclick="salvarEmprestimoDaApi('${tituloEscapado}', '${capaEscapada}', '${index}')">
-                            Finalizar Empréstimo
-                        </button>
-                    </div>
-                `;
-            }
+        <a
+            href="formulario.html?titulo=${encodeURIComponent(titulo)}&capa=${encodeURIComponent(capa)}"
+            class="btn-emprestimo"
+        >
+            Emprestar
+        </a>
+    </div>
+`;
         });
 
-    } catch (error) {
-        if (divLoading) divLoading.innerText = "";
-        if (divResultados) divResultados.innerHTML = "<p>Erro ao buscar livros</p>";
-        console.error(error);
+    } catch (erro) {
+        resultados.innerHTML = "<p>Erro ao buscar livros.</p>";
+        console.error(erro);
     }
 }
 
@@ -147,58 +174,46 @@ if (document.getElementById('livro-titulo') && document.getElementById('livro-ca
 }
 
 function finalizarEmprestimo() {
-    const nomeCliente = document.getElementById('nome-cliente').value;
+
+    const nomeCliente =
+        document.getElementById("nome-cliente").value;
 
     if (!nomeCliente) {
-        alert("Por favor, digite o nome do cliente.");
+        alert("Digite seu nome!");
         return;
     }
+
+    const parametros = new URLSearchParams(window.location.search);
+
+    const titulo = parametros.get("titulo");
+    const capa = parametros.get("capa");
 
     const hoje = new Date();
-    const dataDevolucao = new Date(hoje);
+
+    const dataDevolucao = new Date();
     dataDevolucao.setDate(hoje.getDate() + 7);
-    const dataFormatada = dataDevolucao.toLocaleDateString('pt-BR');
 
-    const novoEmprestimo = {
+    const emprestimos =
+        JSON.parse(localStorage.getItem("emprestimosAtivos")) || [];
+
+    emprestimos.push({
+        livro: titulo,
+        capa: capa,
         cliente: nomeCliente,
-        livro: tituloLivro,
-        capa: capaLivro,
-        devolucao: dataFormatada
-    };
+        dataEmprestimo: hoje.toLocaleDateString("pt-BR"),
+        devolucao: dataDevolucao.toLocaleDateString("pt-BR")
+    });
 
-    const emprestimosAtivos = JSON.parse(localStorage.getItem('emprestimosAtivos')) || [];
-    emprestimosAtivos.push(novoEmprestimo);
-    localStorage.setItem('emprestimosAtivos', JSON.stringify(emprestimosAtivos));
+    localStorage.setItem(
+        "emprestimosAtivos",
+        JSON.stringify(emprestimos)
+    );
+
+    alert(
+        `Livro emprestado com sucesso!\nDevolução: ${dataDevolucao.toLocaleDateString("pt-BR")}`
+    );
 
     window.location.href = "meusEmprestimos.html";
-}
-
-function renderizarEmprestimosAtivos() {
-    const container = document.getElementById('container-emprestimos-ativos');
-    if (!container) return;
-
-    container.innerHTML = '';
-    const emprestimosAtivos = JSON.parse(localStorage.getItem('emprestimosAtivos')) || [];
-
-    if (emprestimosAtivos.length === 0) {
-        container.innerHTML = '<p class="sem-emprestimos">Nenhum empréstimo ativo no momento.</p>';
-        return;
-    }
-
-    emprestimosAtivos.forEach((emprestimo, index) => {
-        const cardHtml = `
-            <div class="card-emprestimo">
-                <img src="${emprestimo.capa}" alt="${emprestimo.livro}">
-                <div class="info-emprestimo">
-                    <h3>${emprestimo.livro}</h3>
-                    <p><strong>Cliente:</strong> ${emprestimo.cliente}</p>
-                    <p><strong>Devolução:</strong> <span class="data-devolucao">${emprestimo.devolucao}</span></p>
-                </div>
-                <button class="btn-devolver" onclick="devolverLivro(${index})">Devolver</button>
-            </div>
-        `;
-        container.innerHTML += cardHtml;
-    });
 }
 
 function devolverLivro(index) {
@@ -209,3 +224,119 @@ function devolverLivro(index) {
 }
 
 document.addEventListener('DOMContentLoaded', renderizarEmprestimosAtivos);
+
+function emprestarLivro(nomeLivro, capa) {
+
+    const emprestimosAtivos =
+        JSON.parse(localStorage.getItem('emprestimosAtivos')) || [];
+
+    const hoje = new Date();
+
+    const dataDevolucao = new Date();
+    dataDevolucao.setDate(hoje.getDate() + 7);
+
+    const novoEmprestimo = {
+        livro: nomeLivro,
+        capa: capa,
+        cliente: localStorage.getItem('usuarioLogado'),
+        dataEmprestimo: hoje.toLocaleDateString('pt-BR'),
+        devolucao: dataDevolucao.toLocaleDateString('pt-BR')
+    };
+
+    emprestimosAtivos.push(novoEmprestimo);
+
+    localStorage.setItem(
+        'emprestimosAtivos',
+        JSON.stringify(emprestimosAtivos)
+    );
+
+    alert('Livro emprestado com sucesso!');
+}
+
+
+function carregarLivroFormulario() {
+
+    const parametros = new URLSearchParams(window.location.search);
+
+    const titulo = parametros.get("titulo");
+    const capa = parametros.get("capa");
+
+    const tituloElemento =
+        document.getElementById("livro-titulo");
+
+    const capaElemento =
+        document.getElementById("livro-capa");
+
+    if (tituloElemento) {
+        tituloElemento.textContent = titulo;
+    }
+
+    if (capaElemento) {
+        capaElemento.src = capa;
+    }
+}
+
+document.addEventListener(
+    "DOMContentLoaded",
+    carregarLivroFormulario
+);
+
+function carregarEmprestimosAdmin() {
+
+    const emprestimos =
+        JSON.parse(localStorage.getItem("emprestimosAtivos")) || [];
+
+    console.log("Empréstimos encontrados:", emprestimos);
+
+    const tabela =
+        document.getElementById("tabelaEmprestimos");
+
+    if (!tabela) return;
+
+    tabela.innerHTML = "";
+
+    emprestimos.forEach((item, index) => {
+
+        tabela.innerHTML += `
+    <tr>
+        <td>
+            <img src="${item.capa}" width="60">
+        </td>
+        <td>${item.livro}</td>
+        <td>${item.cliente}</td>
+        <td>${item.devolucao}</td>
+        <td>
+            <button
+                class="btn-devolver-admin"
+                onclick="devolverEmprestimoAdmin(${index})"
+            >
+                Devolver
+            </button>
+        </td>
+    </tr>
+`;
+    });
+}
+
+function devolverEmprestimoAdmin(index) {
+
+    const emprestimos =
+        JSON.parse(localStorage.getItem("emprestimosAtivos")) || [];
+
+    const confirmar = confirm(
+        "Deseja realmente devolver este livro?"
+    );
+
+    if (!confirmar) return;
+
+    emprestimos.splice(index, 1);
+
+    localStorage.setItem(
+        "emprestimosAtivos",
+        JSON.stringify(emprestimos)
+    );
+
+    carregarEmprestimosAdmin();
+
+    alert("Livro devolvido com sucesso!");
+}

@@ -1,0 +1,126 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+body {
+    background-image: url('https://wallpapers.com/images/hd/bookshelf-background-xfix8ihv6dmfjzyu.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding: 40px 20px;
+}
+
+.container-admin {
+    width: 95%;
+    max-width: 1200px;
+
+    background: rgba(255, 255, 255, 0.95);
+
+    padding: 30px;
+
+    border-radius: 15px;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+.container-admin h1 {
+    text-align: center;
+    color: #8B5E3C;
+    margin-bottom: 10px;
+    font-size: 40px;
+}
+
+.container-admin h2 {
+    text-align: center;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+.tabela-emprestimos {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.tabela-emprestimos thead {
+    background: #8B5E3C;
+    color: white;
+}
+
+.tabela-emprestimos th {
+    padding: 15px;
+    font-size: 18px;
+}
+
+.tabela-emprestimos td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.tabela-emprestimos tr:nth-child(even) {
+    background: #f7f7f7;
+}
+
+.tabela-emprestimos tr:hover {
+    background: #ececec;
+    transition: 0.3s;
+}
+
+.tabela-emprestimos img {
+    width: 70px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+#tabelaEmprestimos td:nth-child(2) {
+    font-weight: bold;
+    color: #333;
+}
+
+#tabelaEmprestimos td:nth-child(3) {
+    color: #8B5E3C;
+    font-weight: bold;
+}
+
+#tabelaEmprestimos td:nth-child(4) {
+    color: #2e7d32;
+    font-weight: bold;
+}
+
+.btn-devolver-admin {
+    background: #c62828;
+    color: white;
+
+    border: none;
+    padding: 8px 15px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+.btn-devolver-admin:hover {
+    background: #e53935;
+    transform: scale(1.05);
+}
+
+.btn-devolver-admin:active {
+    transform: scale(0.95);
+}

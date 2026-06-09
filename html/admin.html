@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrador</title>
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+        <div class="container-admin">
+        <h1>Painel do Administrador</h1>
+        <h2>Empréstimos Realizados</h2>
+
+        <table class="tabela-emprestimos">
+            <thead>
+                <tr>
+                    <th>Capa</th>
+                    <th>Livro</th>
+                    <th>Cliente</th>
+                    <th>Data</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+
+            <tbody id="tabelaEmprestimos">
+              
+            </tbody>
+        </table>
+    </div>
+
+        <script src="../script.js"></script>
+
+        <script>
+            carregarEmprestimosAdmin();
+        </script>
+
+</body>
+</html>

@@ -12,20 +12,11 @@
     <h1>Bem Vindo a nossa Nuvem Literária</h1>
     <h2>Aqui você encontrará uma ampla seleção de livros e recursos literários</h2>
 
-    <!-- CONTAINER DE BUSCA CORRIGIDO COM OS IDS PARA A API -->
-    <div class="container">
-        <h2>Busque seu livro</h2>
-        <input type="text" id="buscaLivro" placeholder="Digite o nome do livro...">
-        <button onclick="buscarLivros()">🔎</button>
-    </div>
+    <input type="text" id="buscaLivro" placeholder="Digite o nome do livro...">
+    <button onclick="buscarLivros()">🔎</button>
 
-    <!-- ELEMENTO DE CARREGAMENTO (LOADING) QUE ESTAVA FALTANDO -->
-    <div id="loading" style="color: black; font-weight: bold; margin: 15px 0; text-align: center;"></div>
-
-    <!-- CONTAINER ONDE OS LIVROS DA API VÃO APARECER -->
-    <div id="resultadosLivros" class="container-livros">
-        <!-- Os livros pesquisados na API vão brotar aqui dentro -->
-    </div>
+    <div id="loading"></div>
+    <div id="resultadosLivros" class="container-livros"></div>
 
    
     <div class="container-livros">
